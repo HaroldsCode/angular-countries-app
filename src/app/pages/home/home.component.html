@@ -2,18 +2,21 @@
   <article class="row d-flex flex-column justify-content-center">
     <h1 class="text-center">Geofy</h1>
     <p class="text-center">Best site ever with information about countries.</p>
-    <form class="col-12 col-md-6 p-2 m-auto">
+    <form
+      [formGroup]="formSearcher"
+      class="col-12 col-md-10 p-2 m-auto"
+      (submit)="formSearcher.valid && goToSearch()"
+    >
       <legend class="w-100 text-center">Let's search</legend>
       <fieldset>
         <div class="form-group pb-3">
-          <select class="form-select" id="dataSellect">
-            <option>Select a search methods...</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </div>
-        <div class="form-group pb-3">
-          <input type="text" class="form-control" aria-describedby="countrySearcher" placeholder="Type the name of country...">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="country"
+            aria-describedby="countrySearcher"
+            placeholder="Type the name of a country..."
+          >
         </div>
         <div class="form-group pb-3 d-flex justify-content-center">
           <button type="submit" class="btn btn-primary">Go to Search</button>
@@ -21,4 +24,22 @@
       </fieldset>
     </form>
   </article>
+  <section *ngIf="countries.length > 0">
+    <h2 class="w-100 text-center mt-4">Result</h2>
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 p-3" *ngFor="let country of countries">
+        <div class="card">
+          <picture>
+            <img [src]="country.flag" style="width: 100%; object-fit: cover;" [title]="country.name" [alt]="country.name">
+          </picture>
+          <div class="card-body">
+            <h5 class="card-title" [title]="country.name" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ country.name }}</h5>
+            <p>{{country.subregion}}, {{country.region}}</p>
+            <p><strong>Population: </strong>{{country.population | number}}</p>
+            <p><strong>Languages: </strong>{{langsFormat(country.languages)}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
