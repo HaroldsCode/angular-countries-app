@@ -26,21 +26,18 @@
       </fieldset>
     </form>
   </article>
-  <section *ngIf="countries.length > 0">
-    <h2 class="w-100 text-center mt-4">Result</h2>
-    <div class="row">
-      <div class="col-sm-6 col-lg-4 p-3" *ngFor="let country of countries">
-        <div class="card">
-          <img [src]="country.flag" class="card-image-custom" [title]="country.name" [alt]="country.name">
-          <div class="card-body">
-            <h5 class="card-title" [title]="country.name" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ country.name }}</h5>
-            <p>{{country.subregion}}, {{country.region}}</p>
-            <p><strong>Capital city: </strong>{{country.capital}}</p>
-            <p><strong>Population: </strong>{{country.population | number}}</p>
-            <p><strong>Languages: </strong>{{langsFormat(country.languages)}}</p>
-          </div>
+  <div class="row" *ngIf="countries.length > 0">
+    <div class="col-sm-6 col-lg-4 p-3" *ngFor="let country of countries">
+      <div class="card">
+        <img [src]="country.flag" class="card-image-custom" [title]="country.name" [alt]="country.name">
+        <div class="card-body">
+          <h5 class="card-title" [title]="country.name" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ country.name }}</h5>
+          <p>{{country.subregion}}, {{country.region}}</p>
+          <p><strong>Capital city: </strong>{{country.capital}}</p>
+          <p><strong>Population: </strong>{{country.population | number}}</p>
+          <p><strong>Languages: </strong>{{langsFormat(country.languages)}}</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
