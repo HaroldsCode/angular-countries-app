@@ -1,25 +1,27 @@
 <main class="container p-5">
   <article class="row d-flex flex-column justify-content-center">
-    <h1 class="text-center">Geofy</h1>
+    <h1 class="text-center" tabindex="1">Geofy</h1>
     <p class="text-center">Best site ever with information about countries.</p>
     <form
       [formGroup]="formSearcher"
       class="col-12 col-md-10 p-2 m-auto"
       (submit)="formSearcher.valid && goToSearch()"
     >
-      <legend class="w-100 text-center">Let's search</legend>
       <fieldset>
         <div class="form-group pb-3">
           <input
             type="text"
+            tabindex="2"
             class="form-control"
+            [ngClass]="(this.formSearcher.get('country')!.touched && (formSearcher.get('country')!.invalid)  ? 'is-invalid' : '')"
             formControlName="country"
             aria-describedby="countrySearcher"
             placeholder="Type the name of a country..."
           >
+          <div class="invalid-feedback">Sorry, min length value required are 3 chars</div>
         </div>
         <div class="form-group pb-3 d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary">Go to Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="formSearcher.invalid" tabindex="3">Go to Search</button>
         </div>
       </fieldset>
     </form>
@@ -29,12 +31,11 @@
     <div class="row">
       <div class="col-sm-6 col-lg-4 p-3" *ngFor="let country of countries">
         <div class="card">
-          <picture>
-            <img [src]="country.flag" style="width: 100%; object-fit: cover;" [title]="country.name" [alt]="country.name">
-          </picture>
+          <img [src]="country.flag" class="card-image-custom" [title]="country.name" [alt]="country.name">
           <div class="card-body">
             <h5 class="card-title" [title]="country.name" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ country.name }}</h5>
             <p>{{country.subregion}}, {{country.region}}</p>
+            <p><strong>Capital city: </strong>{{country.capital}}</p>
             <p><strong>Population: </strong>{{country.population | number}}</p>
             <p><strong>Languages: </strong>{{langsFormat(country.languages)}}</p>
           </div>

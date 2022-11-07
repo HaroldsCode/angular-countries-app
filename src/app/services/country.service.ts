@@ -19,11 +19,11 @@ export class CountryService {
     return this.http.get<CountryDTO[]>(`${this.API_URL}/name/${name.trim()}`).pipe(
       map(data => data.map(item => {
         const { name, capital, subregion, region, population,
-          demonym, nativeName, flag, cioc, languages } = item;
+          flag, languages } = item;
 
         return {
-          name, capital, subregion, region, population, demonym, nativeName,
-          flag, cioc, languages: languages.map(({ iso639_1 }) => ({iso639_1: iso639_1.toUpperCase()}))
+          name, capital, subregion, region, population, flag,
+          languages: languages.map(({ iso639_1 }) => ({iso639_1: iso639_1.toUpperCase()}))
         };
       }))
     );

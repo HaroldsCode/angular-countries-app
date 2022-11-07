@@ -6,7 +6,20 @@ import { CountryDTO, Language } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styles: [`
+    .card-image-custom {
+      height: calc(13em + 1vh);
+      width: 100%;
+      object-position: center;
+      object-fit: cover;
+      transition: 1s ease-in-out;
+    }
+    
+    .card-image-custom:hover {
+      object-fit: fill;
+    }
+  `]
 })
 export class HomeComponent {
 
